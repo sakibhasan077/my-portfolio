@@ -191,58 +191,82 @@ export const projects: Project[] = [
     isSample: false,
   },
   {
-    slug: "weather-dashboard",
-    title: "Weather Dashboard",
+    slug: "fit-log-app",
+    title: "FITLOG — Workout Library",
     summary:
-      "A weather dashboard with current conditions, hourly trends, and saved locations — a sample project.",
+      "A Next.js fitness exercise library where users browse 12 curated lifts, view detailed exercise info, and build a personal workout plan.",
     overview:
-      "A dashboard that turns a public weather API into a calm, readable interface: current conditions at a glance, an hourly trend line, and saved cities the user can switch between.",
+      "FITLOG is a full App Router application built with Next.js 16, TypeScript, and Tailwind CSS 4. Exercise data is served from an external API and rendered through server components, while a client-side React Context lets users compose a daily plan and a saved list. The UI pairs a dark, high-contrast design with daisyUI components, next/font typography (Oswald + Inter), and toast notifications for instant feedback.",
     problem:
-      "Weather data is dense and easy to render as an unreadable wall of numbers. The challenge was to prioritise what people actually check first, and degrade gracefully when the API is slow or unavailable.",
-    tags: ["React", "TypeScript", "REST API", "Charting"],
+      "Workout info is scattered across blogs and apps with inconsistent detail. FITNESS enthusiasts need one place to compare exercises by muscle group, difficulty, duration, and calories — and a quick way to assemble today's session without signing up for an account.",
+    tags: [
+      "Next.js 16",
+      "React 19",
+      "TypeScript",
+      "Tailwind CSS 4",
+      "daisyUI",
+      "React Context API",
+      "react-toastify",
+      "App Router",
+    ],
     features: [
-      "Current conditions with temperature, wind, and humidity",
-      "Hourly and weekly outlooks with simple trend charts",
-      "Requests proxied through a backend route with response caching, so API keys never reach the browser",
-      "Multiple saved locations with fast switching",
-      "Unit toggle that persists between visits",
-      "Clear loading, empty, and error states for every request",
+      "Exercise library grid fetched from an external API with name, muscle groups, equipment, duration, calories, and rating",
+      "Dynamic detail routes (/[exerciseId]) with full instructions, sets, reps, and a stats table",
+      "Add to Today's Plan and Save for Later actions with success/error toast feedback and duplicate protection",
+      "My Plan page with Today's/Saved tabs, sortable by duration, calories, or rating, plus live exercise/minute/calorie counters",
+      "Server components for data fetching with manual Suspense fallbacks for loading states",
+      "Custom 404 handling for missing or failed exercise requests",
+      "Responsive layout (mobile → desktop), remote image optimization via next/image, and Google font optimization via next/font",
     ],
     challenges: [
       {
         challenge:
-          "Displaying several days of data without overwhelming the eye.",
+          "Next.js 16 diverges from known conventions (breaking API changes vs. training data)",
         solution:
-          "Used a strict visual hierarchy — one dominant current-conditions card, then progressively quieter detail — plus charts only where they beat a table.",
-      },
-      {
-        challenge: "Slow or failed API responses leaving a blank screen.",
-        solution:
-          "Wrapped requests in explicit loading and error states with a retry action, so the UI is never empty or falsely confident.",
+          "Consulted the bundled guides in node_modules/next/dist/docs before writing code; handled params being a Promise in dynamic routes by awaiting it.",
       },
       {
         challenge:
-          "Avoiding rate limits and repeated round-trips for the same forecasts.",
+          "Integrating client-only state (plan lists, toasts) with server-rendered pages",
         solution:
-          "Requests go through a server route with short-lived response caching, which keeps API keys private and makes repeat views instant.",
+          "Kept data fetching in async server components and isolated interactivity in 'use client' children that consume a shared ExerciseContext mounted in the root layout.",
+      },
+      {
+        challenge: "Tailwind v4 removed the traditional config-file workflow",
+        solution:
+          "Moved all configuration into app/globals.css using CSS-first directives (@import 'tailwindcss', @plugin 'daisyui', @theme inline) with no tailwind.config file.",
+      },
+      {
+        challenge: "next/image rejects remote hosts by default",
+        solution:
+          "Whitelisted the API's image host (img.magnific.com) in next.config.ts under images.remotePatterns.",
+      },
+      {
+        challenge: "Duplicate entries polluting the workout plan",
+        solution:
+          "Checked exercise id uniqueness before adding and surfaced a toast error instead of silently inserting duplicates.",
       },
     ],
     improvements: [
-      "Geolocation-based automatic location",
-      "Weather alerts and severity highlighting",
-      "Service worker for offline last-known data",
+      "Persist Today's Plan and Saved lists to localStorage so state survives reloads (currently in-memory only)",
+      "Add search and filters (muscle group, difficulty, equipment) to the library",
+      "Add an error.tsx boundary and handle API failures in the library list (detail route already checks res.ok)",
+      "Rename the typo'd app/myPlan/loding.tsx so route loading conventions are correct",
+      "Add tests (none exist today) and per-route metadata",
     ],
     roadmap: [
-      "Severe weather notifications",
-      "Radar map layer",
-      "Home-screen widgets",
+      "Mark exercises complete during a session and track weekly streaks",
+      "User accounts with server-synced plans",
+      "Workout history with progress charts",
+      "PWA/offline support for gym use without signal",
+      "Deploy to Vercel with a custom domain",
     ],
-    liveUrl: null,
-    repoUrl: null,
+    liveUrl: "https://fit-log-app-gold.vercel.app/",
+    repoUrl: "https://github.com/sakibhasan077/Fit-Log-App",
     iconKey: "weather",
     accent: "indigo",
-    image: null,
-    isSample: true,
+    image: "/image/fitlog.png", // set to "/image/fitlog.png" once a real screenshot exists
+    isSample: false,
   },
 ];
 
