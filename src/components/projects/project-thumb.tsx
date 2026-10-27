@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import type { Project } from "@/data/projects";
 import { projectIcons } from "@/data/project-icons";
@@ -22,6 +23,29 @@ export function ProjectThumb({
   size?: "md" | "lg";
 }) {
   const Icon = projectIcons[project.iconKey];
+
+  // Real screenshot supplied in the data — show it instead of the placeholder.
+  if (project.image) {
+    return (
+      <div
+        role="img"
+        aria-label={`Screenshot of ${project.title}`}
+        className={cn(
+          "relative aspect-video overflow-hidden bg-muted",
+          className
+        )}
+      >
+        <Image
+          src={project.image}
+          alt={`Screenshot of ${project.title}`}
+          fill
+          sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+          className="object-cover object-top"
+        />
+      </div>
+    );
+  }
+
   return (
     <div
       role="img"

@@ -27,56 +27,91 @@ export type Project = {
   iconKey: ProjectIconKey;
   /** Placeholder visual accent — swap alongside real screenshots. */
   accent: "indigo" | "violet" | "cyan";
+  /** Real screenshot path under /public. `null` falls back to the CSS placeholder. */
+  image: string | null;
   isSample: boolean;
 };
 
 export const projects: Project[] = [
   {
-    slug: "e-commerce-platform",
-    title: "E-commerce Platform",
-    summary:
-      "A storefront with product browsing, a persistent cart, and a streamlined checkout flow, built as a sample project.",
-    overview:
-      "A full storefront experience: searchable product listings, product detail pages, a cart that survives navigation and devices, and a multi-step checkout backed by an order API. Built to practice API design, data modelling, and the performance work that shopping interfaces demand.",
-    problem:
-      "Shoppers abandon sites that feel slow or unpredictable. The task was to keep browsing and cart interactions instant, the order flow trustworthy, and the codebase simple enough to extend with new product types.",
-    tags: ["Next.js", "TypeScript", "Tailwind CSS", "Node.js", "MongoDB"],
-    features: [
-      "Responsive product grid with search and category filters",
-      "REST API for products, cart, and orders with server-side validation",
-      "Product detail pages with image gallery and related items",
-      "Persistent cart with quantity controls and live totals",
-      "Checkout flow with client-side validation and clear error states",
-      "Accessible keyboard navigation across the whole purchase path",
-    ],
-    challenges: [
-      {
-        challenge: "Keeping cart state consistent across pages, sessions, and devices.",
-        solution:
-          "One typed store drives every surface on the client and syncs to the cart API, so totals never disagree — and a failed write rolls back to the last known good state.",
-      },
-      {
-        challenge: "Avoiding layout shift while product images load.",
-        solution:
-          "Reserved image aspect ratios up front and lazy-loaded below-the-fold media, keeping cumulative layout shift near zero.",
-      },
-    ],
-    improvements: [
-      "Server-side search with URL-synced filters",
-      "Inventory checks during checkout",
-      "End-to-end tests for the checkout flow",
-    ],
-    roadmap: [
-      "User accounts with order history",
-      "Saved carts and wishlist support",
-      "Payment provider integration behind the existing order API",
-    ],
-    liveUrl: null,
-    repoUrl: null,
-    iconKey: "cart",
-    accent: "violet",
-    isSample: true,
-  },
+  slug: "bazar-dor",
+  title: "BazarDor — বাজার দর",
+  summary:
+    "A bilingual (বাংলা) market-price tracker that helps shoppers in Bangladesh compare daily product prices across local markets.",
+  overview:
+    "BazarDor (\"market price\") lets users browse a full product catalog, see today's price against yesterday's, and check which items went up or down. It's built on the Next.js 16 App Router with React Server Components, streams data with skeleton loading states, and ships a Bengali-first, mobile-friendly UI using HeroUI, daisyUI, and Tailwind CSS 4.",
+  problem:
+    "Daily grocery prices in Bangladesh vary widely between local markets and change every day, but there's no single place to see today's rate, compare it with yesterday's, or find the cheapest market — shoppers rely on word of mouth and overpay.",
+  tags: [
+    "Next.js 16",
+    "React 19",
+    "TypeScript",
+    "Tailwind CSS 4",
+    "Better Auth",
+    "MongoDB",
+    "HeroUI",
+    "daisyUI",
+  ],
+  features: [
+    "Product catalog with today's price, yesterday's price, and percentage change",
+    "\"আজ দাম বেড়েছে\" (price up) and \"আজ দাম কমেছে\" (price down) sections sorted by biggest change",
+    "Category filtering via navbar and dropdown menus",
+    "Per-product detail page with a market-wise price table and computed min/max",
+    "Email/password sign-up and sign-in plus Google & GitHub OAuth via Better Auth",
+    "Profile page for signed-in users to view and update their info",
+    "Bengali-first UI with Hind Siliguri font and bn-BD number formatting",
+    "Route-level streaming with skeleton placeholders (loading.tsx)",
+    "Custom Bengali 404 page for missing products/categories",
+    "Fully responsive layout for desktop, tablet, and mobile",
+  ],
+  challenges: [
+    {
+      challenge:
+        "Product data comes from an external REST API, so page loads had to stay fast while waiting on network responses.",
+      solution:
+        "Fetched data in React Server Components with ISR revalidation (80s on the home page, 500s on category pages) and paired each route with a loading.tsx skeleton for streaming UI.",
+    },
+    {
+      challenge:
+        "Auth had to work with multiple providers without introducing a heavy backend.",
+      solution:
+        "Integrated Better Auth with the MongoDB adapter — email/password plus Google and GitHub OAuth — exposed through a single catch-all API route (app/api/auth/[...all]).",
+    },
+    {
+      challenge:
+        "Price movements (up/down/flat) and per-market min/max needed to be computed consistently across pages.",
+      solution:
+        "Centralized the shared shapes in TypeScript interfaces (AllProductType, MarketsType) and derived the trend and extremes from the change payload on the server before rendering.",
+    },
+    {
+      challenge:
+        "The entire UI is Bangla-first, which breaks default number and typography handling.",
+      solution:
+        "Used the Hind Siliguri font and bn-BD locale formatting for all numbers and localized copy throughout the app.",
+    },
+  ],
+  improvements: [
+    "Add search and sorting (by price, change %, or name) across the catalog",
+    "Add price history charts per product to visualize trends over time",
+    "Replace polling-style revalidation with webhooks or a cron to refresh the cache",
+    "Persist a favorites/watchlist per user with MongoDB",
+    "Add dark mode and language toggling between বাংলা and English",
+    "Add unit and E2E test coverage (Vitest + Playwright)",
+  ],
+  roadmap: [
+    "Price alerts — notify users when a watched product crosses a target price",
+    "Weekly and monthly price trend reports per district",
+    "PWA support with offline access to recently viewed products",
+    "Admin dashboard for reporting incorrect market prices",
+    "Expand beyond groceries to fish, meat, and seasonal produce markets",
+  ],
+  liveUrl: "https://bazar-dor-three-inky.vercel.app", // add your Vercel deployment URL here
+  repoUrl: "https://github.com/sakibhasan077/bazar-dor",
+  iconKey: "cart", // match against your ProjectIconKey map
+  accent: "cyan",
+  image: "/image/update-bazar.png", // add your screenshot path here (under /public)
+  isSample: false,
+},
   {
     slug: "task-management-app",
     title: "Task Management Application",
@@ -125,6 +160,7 @@ export const projects: Project[] = [
     repoUrl: null,
     iconKey: "tasks",
     accent: "cyan",
+    image: null,
     isSample: true,
   },
   {
@@ -176,6 +212,7 @@ export const projects: Project[] = [
     repoUrl: null,
     iconKey: "weather",
     accent: "indigo",
+    image: null,
     isSample: true,
   },
 ];

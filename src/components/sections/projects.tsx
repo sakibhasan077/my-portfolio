@@ -18,10 +18,10 @@ export function Projects() {
           description="Each project opens a full details page — the problem, the approach, the trade-offs, and what I'd improve next."
         />
 
-        <PlaceholderNote>
+        {/* <PlaceholderNote>
           Sample projects marked with a “Sample” badge — replace them with your real work in{" "}
           <code className="rounded border border-border bg-card px-1.5 py-0.5">src/data/projects.ts</code>.
-        </PlaceholderNote>
+        </PlaceholderNote> */}
 
         <div className="grid w-full gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project, index) => (
