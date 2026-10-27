@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { CloudSun, ListChecks, ShoppingCart } from "lucide-react";
+import { CloudSun, LayoutDashboard, ShoppingCart } from "lucide-react";
 import type { ProjectIconKey } from "@/data/projects";
 
 /**
@@ -10,6 +10,6 @@ import type { ProjectIconKey } from "@/data/projects";
  */
 export const projectIcons: Record<ProjectIconKey, LucideIcon> = {
   cart: ShoppingCart,
-  tasks: ListChecks,
+  portfolio: LayoutDashboard,
   weather: CloudSun,
 };
