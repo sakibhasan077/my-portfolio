@@ -19,7 +19,10 @@ const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
 });
 
+const SITE_URL = "https://sakibhasan077.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Sakib Hasan — Full-stack Developer",
     template: "%s · Sakib Hasan",
@@ -38,22 +41,33 @@ export const metadata: Metadata = {
     "typescript",
     "tailwind css",
   ],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: "Sakib Hasan",
+    url: SITE_URL,
     title: "Sakib Hasan — Full-stack Developer",
     description:
       "Portfolio of Sakib Hasan, a full-stack developer building end-to-end web products with React, Next.js, and Node.js.",
+    images: [
+      {
+        url: "/image/og.png",
+        width: 1825,
+        height: 769,
+        alt: "Sakib Hasan — Full-stack Developer portfolio preview",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "Sakib Hasan — Full-stack Developer",
     description:
       "Portfolio of Sakib Hasan, a full-stack developer building end-to-end web products with React, Next.js, and Node.js.",
+    images: ["/image/og.png"],
   },
-  // No canonical URL or OG image yet: the production domain and assets are
-  // unknown. Add both in metadata once they exist (README §17).
 };
 
 export const viewport: Viewport = {
