@@ -1,4 +1,4 @@
-export const instant = false; 
+export const instant = false;
 import type { Metadata } from "next";
 import { Suspense, type ReactNode } from "react";
 import Link from "next/link";
@@ -206,7 +206,23 @@ export default async function ProjectDetailsPage({ params }: PageProps<"/project
                   className={buttonVariants({ variant: "outline", size: "lg" })}
                 >
                   <FaGithub aria-hidden="true" />
-                  Source code
+                  Github Client
+                </a>
+              ) : (
+                <Badge variant="outline" className="px-3 py-1.5">
+                  Repository: coming soon
+                </Badge>
+              )}
+
+              {project.serverUrl ? (
+                <a
+                  href={project.serverUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ variant: "outline", size: "lg" })}
+                >
+                  <FaGithub aria-hidden="true" />
+                  Github Server 
                 </a>
               ) : (
                 <Badge variant="outline" className="px-3 py-1.5">

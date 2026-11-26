@@ -24,6 +24,7 @@ export type Project = {
   roadmap: string[];
   liveUrl: string | null;
   repoUrl: string | null;
+  serverUrl?: string | null;
   iconKey: ProjectIconKey;
   /** Placeholder visual accent — swap alongside real screenshots. */
   accent: "indigo" | "violet" | "cyan";
@@ -89,9 +90,10 @@ export const projects: Project[] = [
     ],
     liveUrl: "https://book-nook077.vercel.app",
     repoUrl: "https://github.com/sakibhasan077/book-nook-client",
+    serverUrl: "https://github.com/sakibhasan077/book-nook-server",
     iconKey: "book-open",
     accent: "indigo",
-    image: null,
+    image: "/image/Book-Nook.png",
     isSample: false,
   },
   {
