@@ -1,5 +1,5 @@
 import type { LucideIcon } from "lucide-react";
-import { CloudSun, LayoutDashboard, ShoppingCart } from "lucide-react";
+import { BookOpen, CloudSun, LayoutDashboard, ShoppingCart } from "lucide-react";
 import type { ProjectIconKey } from "@/data/projects";
 
 /**
@@ -9,6 +9,7 @@ import type { ProjectIconKey } from "@/data/projects";
  * here, next to the components that render them.
  */
 export const projectIcons: Record<ProjectIconKey, LucideIcon> = {
+  "book-open": BookOpen,
   cart: ShoppingCart,
   portfolio: LayoutDashboard,
   weather: CloudSun,

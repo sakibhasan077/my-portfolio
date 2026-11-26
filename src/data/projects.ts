@@ -9,7 +9,7 @@
  * src/data/project-icons.ts and never cross into client components.
  */
 
-export type ProjectIconKey = "cart" | "portfolio" | "weather";
+export type ProjectIconKey = "book-open" | "cart" | "portfolio" | "weather";
 
 export type Project = {
   slug: string;
@@ -33,6 +33,67 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    slug: "book-nook",
+    title: "BookNook",
+    summary:
+      "A community library platform for discovering books, sharing a collection, and managing borrowing activity.",
+    overview:
+      "BookNook brings readers and community-contributed books together in a responsive web app. Visitors can explore the catalog and book details, while signed-in members can add and manage books, borrow available titles, return them, and review their personal activity. The Next.js frontend connects to a separate Express API for book and borrowing operations, with Better Auth handling account sessions.",
+    problem:
+      "A shared collection can be difficult to explore and keep organized when book details, available copies, contributions, and borrowing activity are tracked separately. BookNook provides one interface for browsing the collection and managing these reader and contributor workflows.",
+    tags: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Better Auth",
+      "MongoDB",
+      "Express.js",
+    ],
+    features: [
+      "Browse the shared book collection and view individual book details.",
+      "Explore featured book imagery and a new-arrivals section on the homepage.",
+      "Sign up and sign in with email/password or Google authentication.",
+      "Add books with metadata, category, cover image URL, and copy count.",
+      "View, edit, and delete books contributed by the signed-in member.",
+      "Borrow available books and view personal borrowing dates and history.",
+      "Return borrowed books and refresh the member's borrowing list.",
+      "Use responsive layouts and reader testimonial carousels.",
+    ],
+    challenges: [
+      {
+        challenge:
+          "Personalized book and borrowing pages need the signed-in identity, while the separate API expects authenticated requests.",
+        solution:
+          "Use Better Auth sessions to identify the member and retrieve bearer tokens for API requests, with server-side token handling on personalized pages and client-side token handling for interactive actions.",
+      },
+      {
+        challenge:
+          "Book availability and borrowing actions span book details, member activity pages, and the backend API.",
+        solution:
+          "Keep book and borrow operations behind dedicated API endpoints, disable the borrow action when no copies are available, and refresh the relevant page after borrow or return actions.",
+      },
+    ],
+    improvements: [
+      "Add catalog search, category filters, sorting, and pagination for larger collections.",
+      "Improve form submission states and field-level feedback for book management actions.",
+      "Add explicit empty, loading, and recoverable error states for API-backed pages.",
+      "Use real, project-specific screenshots in place of portfolio placeholder visuals.",
+    ],
+    roadmap: [
+      "Add favorites or a personal reading wishlist.",
+      "Introduce overdue tracking, borrowing limits, and return reminders.",
+      "Expand discovery with richer recommendations and searchable reader reviews.",
+      "Add library administration tools and collection activity analytics.",
+    ],
+    liveUrl: "https://book-nook077.vercel.app",
+    repoUrl: "https://github.com/sakibhasan077/book-nook-client",
+    iconKey: "book-open",
+    accent: "indigo",
+    image: null,
+    isSample: false,
+  },
   {
     slug: "bazar-dor",
     title: "BazarDor — বাজার দর",
