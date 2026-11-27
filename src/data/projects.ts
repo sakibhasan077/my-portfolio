@@ -23,7 +23,8 @@ export type Project = {
   improvements: string[];
   roadmap: string[];
   liveUrl: string | null;
-  repoUrl: string | null;
+  repoUrl?: string | null;
+  clientUrl?: string | null;
   serverUrl?: string | null;
   iconKey: ProjectIconKey;
   /** Placeholder visual accent — swap alongside real screenshots. */
@@ -89,7 +90,7 @@ export const projects: Project[] = [
       "Add library administration tools and collection activity analytics.",
     ],
     liveUrl: "https://book-nook077.vercel.app",
-    repoUrl: "https://github.com/sakibhasan077/book-nook-client",
+    clientUrl: "https://github.com/sakibhasan077/book-nook-client",
     serverUrl: "https://github.com/sakibhasan077/book-nook-server",
     iconKey: "book-open",
     accent: "indigo",

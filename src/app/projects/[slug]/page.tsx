@@ -206,11 +206,27 @@ export default async function ProjectDetailsPage({ params }: PageProps<"/project
                   className={buttonVariants({ variant: "outline", size: "lg" })}
                 >
                   <FaGithub aria-hidden="true" />
-                  Github Client
+                  Source Code
                 </a>
               ) : (
                 <Badge variant="outline" className="px-3 py-1.5">
-                  Repository: coming soon
+                  ""
+                </Badge>
+              )}
+
+              {project.clientUrl ? (
+                <a
+                  href={project.clientUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={buttonVariants({ variant: "outline", size: "lg" })}
+                >
+                  <FaGithub aria-hidden="true" />
+                  Github Client 
+                </a>
+              ) : (
+                <Badge variant="outline" className="px-3 py-1.5">
+                  ""
                 </Badge>
               )}
 
@@ -222,11 +238,11 @@ export default async function ProjectDetailsPage({ params }: PageProps<"/project
                   className={buttonVariants({ variant: "outline", size: "lg" })}
                 >
                   <FaGithub aria-hidden="true" />
-                  Github Server 
+                  Github Server
                 </a>
               ) : (
                 <Badge variant="outline" className="px-3 py-1.5">
-                  Repository: coming soon
+                  ""
                 </Badge>
               )}
             </div>
